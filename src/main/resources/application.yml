@@ -1,0 +1,60 @@
+server:
+  port: 8080
+  tomcat:
+    threads:
+      max: 200
+
+spring:
+  application:
+    name: gara_management
+  web.resources.add-mappings: false
+  datasource:
+    url: ${DATA_SOURCE_URL:jdbc:mysql://localhost:3306/gara}
+    username: ${DATA_SOURCE_USERNAME:root}
+    password: ${DATA_SOURCE_PASSWORD:123456}
+    driver-class-name: ${DATA_SOURCE_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+    hikari:
+      maximum-pool-size: ${HIKARI_MAXIMUM_POOL_SIZE:20}
+  data.web.pageable.one-indexed-parameters: true
+  jpa:
+    open-in-view: false
+  main:
+    allow-circular-references: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: thanhcong2521@gmail.com
+    password: jdbaxqizttonbthb
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+mail-config:
+  senderName: ${MAIL_SENDER_NAME:Garaman}
+  senderAddress: ${MAIL_SENDER_ADDRESS:thanhcong2521@gmail.com}
+
+logging:
+  pattern:
+    level: '%5p [${spring.application.name},%X{traceId:-},%X{spanId:-}]'
+  level:
+    org.hibernate.SQL: ${LOG_LEVEL_HIBERNATE_SQL:DEBUG}
+    org.hibernate.type.descriptor.sql: ${LOG_LEVEL_HIBERNATE_SQL_VALUE:DEBUG}
+
+jwt-config:
+  secretKey: ${JWT_SECRET_KEY:}
+  expiryDuration: ${JWT_EXPIRY_DURATION:}
+  refreshDuration: ${JWT_REFRESH_DURATION:}
+
+google:
+  recaptcha:
+    key:
+      site: ${GOOGLE_RECAPTCHA_KEY_SITE}
+      secret: ${GOOGLE_RECAPTCHA_KEY_SECRET}
+      threshold: 0.5
